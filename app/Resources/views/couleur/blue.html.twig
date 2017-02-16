@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <body class="blue">
+        {%block nav %}
+            {# on rappelle le block nav du parent base.html.twig #}
+            {{ parent() }}
+        {%endblock%}
+    </body>
+{% endblock %}

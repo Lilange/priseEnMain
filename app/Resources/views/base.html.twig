@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{asset('../CSS/style.css')}}"/>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+{% block body %}
+    <body class=""> 
+        {#    on creer un block nav qui est rappelé dans nos autres pages   #}
+        {% block nav %}
+            <nav>
+                <ul>
+                    {# on link grace au path (name) la route #}
+                    <li><a href="{{path('blue')}}">Blue</a></li>
+                    <li><a href="{{path('yellow')}}">Yellow</a></li>
+                    <li><a href="{{path('red')}}">Red</a></li>
+                    <li><a href="{{path('green')}}">Green</a></li>
+                        {% if is_granted('ROLE_USER') %}
+                        <p>Hi <a class="user" href="{{path('logout')}}">{{app.user}}</a></p>    
+                        {% else %}
+                        <form action="{{ path('loginCheck') }}" method="post">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="_username" />
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="_password" />
+                            <input type="submit" name="login" />
+                        </form>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endblock %}
+    </body>
+{% endblock %}
+{% block javascripts %}{% endblock %}
+</html>
